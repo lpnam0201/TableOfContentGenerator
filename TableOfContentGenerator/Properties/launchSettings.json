@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TableOfContentGenerator": {
+      "commandName": "Project",
+      "commandLineArgs": "--Input \"C:\\Users\\lpnam\\Desktop\\17_2023_ND-CP_565147.docx\" --Output t.docx --Mode NghiDinh"
+    }
+  }
+}

@@ -8,5 +8,7 @@ namespace TableOfContentGenerator
         public string Input { get; set; }
         [Option("Output", Required = true)]
         public string Output { get; set; }
+        [Option("Mode")]
+        public ProcessingMode Mode { get; set; }
     }
 }
