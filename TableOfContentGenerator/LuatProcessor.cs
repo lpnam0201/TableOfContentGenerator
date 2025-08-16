@@ -31,11 +31,40 @@ namespace TableOfContentGenerator
                 .ToList();
             foreach (var chapter in chapters)
             {
+                // make Chapter text + Chapter number on same line
+                var oldText = chapter.Text;
+
+                var nextParagraph = chapter.NextParagraph;
+                var newText = ComputeNewChapterText(oldText, nextParagraph.Text);
+
+                var options = new StringReplaceTextOptions()
+                {
+                    SearchValue = oldText,
+                    NewValue = newText
+                };
+                chapter.ReplaceText(options);
+                nextParagraph.Remove(false);
+
                 chapter.Heading(HeadingType.Heading1)
                     .Font(new Font("Arial"))
                     .FontSize(10)
                     .Bold();
             }
+        }
+
+        private string ComputeNewChapterText(string chapterNumber, string chapterName)
+        {
+            if (chapterNumber.EndsWith(": "))
+            {
+                return $"{chapterNumber}{chapterName}";
+            }
+
+            if (chapterNumber.EndsWith(":"))
+            {
+                return $"{chapterNumber} {chapterName}";
+            }
+
+            return $"{chapterNumber}: {chapterName}";
         }
 
         private void ProcessSections(DocX document)
